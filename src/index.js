@@ -43,6 +43,12 @@ document.addEventListener("DOMContentLoaded", () => {
     event.target.reset();
     displayTasks();
   })
+  newTasks.addEventListener("click", (event) => {
+    if (event.target.nodeName == "BUTTON") {
+      taskList.deleteTask(event.target.dataset.description);
+      displayTasks();
+    }
+  })
 
 });
 
@@ -60,4 +66,5 @@ class Task {
       `;
   }
 }
+
 
