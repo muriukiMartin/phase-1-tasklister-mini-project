@@ -21,7 +21,7 @@ class TaskList {
 
 
 document.addEventListener("DOMContentLoaded", () => {
-  const TaskList = new TaskList();
+  const taskList = new TaskList();
   //initialize task class
   //get user input from form
   const newForm = document.getElementById("create-task-form");
@@ -29,4 +29,35 @@ document.addEventListener("DOMContentLoaded", () => {
 
   //get list of tasks
   const newTasks = document.getElementById("tasks");
+
+  //display created tasks to list
+  const displayTasks = () => (newTasks.innerHTML = taskList.renderTasks());
+  
+  //add event listeners
+  newForm.addEventListener("submit", (event) => {
+    //preventDefault() to stop submit if empty
+    event.preventDefault();
+    taskList.createNewTask(newTask.value);
+
+    //to reset form after submission
+    event.target.reset();
+    displayTasks();
+  })
+
 });
+
+class Task {
+  constructor(description) {
+    this.description = description;
+  }
+  // add delete button
+  render() {
+    return `
+      <li>
+        ${this.description}
+        <button data-description="${this.description}">Delete</button>
+      </li>
+      `;
+  }
+}
+
